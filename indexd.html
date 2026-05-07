@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElyPrism - Скачать лаунчер</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d8f6f;
+            --dark-green: #1e5f48;
+            --light-green: #3db889;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #2a2a2a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Навигация */
+        .navbar {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 40px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--light-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-green);
+        }
+
+        /* Hero секция */
+        .hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f1a16 50%, #0a0a0a 100%);
+            padding: 100px 40px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 30%, rgba(45, 143, 111, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 10px 30px rgba(45, 143, 111, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+
+        .hero h1 .highlight {
+            color: var(--light-green);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Кнопки скачивания */
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(45, 143, 111, 0.4);
+            border: 2px solid transparent;
+            min-width: 240px;
+            justify-content: center;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(45, 143, 111, 0.6);
+            border-color: var(--light-green);
+        }
+
+        .download-btn .icon {
+            font-size: 1.4rem;
+        }
+
+        .download-btn.secondary {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 2px solid var(--border-color);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .download-btn.secondary:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 12px 35px rgba(45, 143, 111, 0.3);
+        }
+
+        /* Особенности */
+        .features {
+            padding: 90px 40px;
+            background: var(--bg-dark);
+        }
+
+        .features-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            letter-spacing: -1px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Секретная панель */
+        .secret-panel {
+            display: none;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, rgba(255, 142, 83, 0.08) 100%);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 900px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .secret-panel.active {
+            display: block;
+        }
+
+        .secret-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .secret-header h3 {
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-secret {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            color: #ff6b6b;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-secret:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .add-file-form {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .add-file-input {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .add-file-input:focus {
+            border-color: #ff6b6b;
+        }
+
+        .add-file-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .add-btn {
+            padding: 15px 28px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .custom-files-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .custom-file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid #ff6b6b;
+            border-radius: 10px;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .custom-file-name {
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .custom-file-name::before {
+            content: '📎';
+        }
+
+        .custom-file-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-download-custom {
+            padding: 8px 18px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download-custom:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-remove {
+            padding: 8px 14px;
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            color: #ff6b6b;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remove:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        /* Футер */
+        .footer {
+            background: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--light-green);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 70px 20px 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.05rem;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .download-btn {
+                min-width: auto;
+            }
+            
+            .features {
+                padding: 60px 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .add-file-form {
+                flex-direction: column;
+            }
+        }
+
+        /* Подсказка */
+        .hint {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.85rem;
+            margin-top: 30px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://qc4n.bigmodel.cn/imageHuLr_loaded.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1809629065&Signature=gA8gw0TaVl2Xglc6U8d%2Bb0JSgi0%3D" alt="ElyPrism Logo" class="logo-img">
+                <span class="logo-text">Ely<span>Prism</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#download">Скачать</a></li>
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#">Документация</a></li>
+                <li><a href="#">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero секция -->
+    <section class="hero" id="download">
+        <div class="hero-container">
+            <img src="https://qc4n.bigmodel.cn/imageHuLr_loaded.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1809629065&Signature=gA8gw0TaVl2Xglc6U8d%2Bb0JSgi0%3D" alt="ElyPrism Logo" class="hero-logo">
+            
+            <h1>Ely<span class="highlight">Prism</span> Launcher</h1>
+            <p>Современный лаунчер Minecraft с открытым исходным кодом. Быстрый, безопасный и мощный.</p>
+            
+            <div class="download-buttons">
+                <a href="Ely_prism_launcher.exe" download class="download-btn">
+                    <span class="icon">⚙️</span>
+                    Скачать EXE
+                </a>
+                <a href="Ely_prism_launcher_portable.zip" download class="download-btn secondary">
+                    <span class="icon">📦</span>
+                    Portable версия (ZIP)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секретная панель -->
+    <div id="secretPanel" class="secret-panel">
+        <div class="secret-header">
+            <h3>🔐 Панель администратора</h3>
+            <button class="close-secret" onclick="toggleSecret()">✕</button>
+        </div>
+        
+        <p style="color: rgba(255,255,255,0.75); margin-bottom: 20px;">
+            Добавьте свой файл в папку с сайтом и введите его имя:
+        </p>
+        
+        <div class="add-file-form">
+            <input type="text" 
+                   id="customFileInput" 
+                   class="add-file-input" 
+                   placeholder="Имя файла (например: my_file.pdf)"
+                   onkeypress="if(event.key === 'Enter') addCustomFile()">
+            <button class="add-btn" onclick="addCustomFile()">+ Добавить</button>
+        </div>
+        
+        <div id="customFilesList" class="custom-files-list"></div>
+    </div>
+
+    <p class="hint">💡 Нажмите Ctrl+Shift+A чтобы открыть панель администратора</p>
+
+    <!-- Особенности -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <h2 class="section-title">Почему ElyPrism?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Высокая производительность</h3>
+                    <p>Оптимизированный код обеспечивает быструю загрузку и плавную работу даже на слабых компьютерах.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Безопасность</h3>
+                    <p>Регулярные обновления защиты и проверка модов на вредоносный код.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Современный дизайн</h3>
+                    <p>Интуитивный интерфейс с поддержкой темной и светлой темы оформления.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Открытый исходный код</h3>
+                    <p>Полностью открытый проект на GitHub. Прозрачность и доверие сообщества.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Менеджер модов</h3>
+                    <p>Встроенная поддержка CurseForge, Modrinth и других платформ модов.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Автообновления</h3>
+                    <p>Автоматическое обновление лаунчера и установленных версий Minecraft.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <p>© 2025 ElyPrism Launcher. Создано с ❤️ для сообщества Minecraft.</p>
+        <p style="margin-top: 10px;">
+            <a href="#">GitHub</a> · 
+            <a href="#">Discord</a> · 
+            <a href="#">Документация</a>
+        </p>
+    </footer>
+
+    <script>
+        // Секретная комбинация: Ctrl + Shift + A
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                toggleSecret();
+            }
+        });
+
+        function toggleSecret() {
+            const panel = document.getElementById('secretPanel');
+            panel.classList.toggle('active');
+            
+            if (panel.classList.contains('active')) {
+                document.getElementById('customFileInput').focus();
+            }
+        }
+
+        // Хранение пользовательских файлов
+        let customFiles = [];
+
+        function addCustomFile() {
+            const input = document.getElementById('customFileInput');
+            const fileName = input.value.trim();
+            
+            if (!fileName) {
+                alert('❌ Введите имя файла!');
+                return;
+            }
+            
+            if (customFiles.includes(fileName)) {
+                alert('⚠️ Этот файл уже добавлен!');
+                return;
+            }
+            
+            customFiles.push(fileName);
+            createFileElement(fileName);
+            input.value = '';
+            
+            console.log(`✅ Добавлен файл: ${fileName}`);
+        }
+
+        function createFileElement(fileName) {
+            const container = document.getElementById('customFilesList');
+            
+            const item = document.createElement('div');
+            item.className = 'custom-file-item';
+            item.id = `file-${fileName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            
+            item.innerHTML = `
+                <span class="custom-file-name">${fileName}</span>
+                <div class="custom-file-actions">
+                    <a href="${fileName}" download class="btn-download-custom">⬇ Скачать</a>
+                    <button class="btn-remove" onclick="removeFile('${fileName}', this)">✕</button>
+                </div>
+            `;
+            
+            container.appendChild(item);
+        }
+
+        function removeFile(fileName, btn) {
+            const index = customFiles.indexOf(fileName);
+            if (index > -1) customFiles.splice(index, 1);
+            
+            const item = btn.closest('.custom-file-item');
+            item.style.animation = 'fadeInUp 0.3s ease reverse';
+            setTimeout(() => item.remove(), 300);
+            
+            console.log(`❌ Удален файл: ${fileName}`);
+        }
+
+        // Сохранение в localStorage
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('elyprism_custom_files', JSON.stringify(customFiles));
+        });
+
+        window.onload = () => {
+            const saved = localStorage.getItem('elyprism_custom_files');
+            if (saved) {
+                customFiles = JSON.parse(saved);
+                customFiles.forEach(f => createFileElement(f));
+            }
+        };
+
+        // Консольное сообщение
+        console.log('%c🔐 ElyPrism Admin Mode', 'color: #ff6b6b; font-size: 24px; font-weight: bold;');
+        console.log('%cНажмите Ctrl+Shift+A для открытия панели администратора', 'color: #2d8f6f; font-size: 14px;');
+    </script>
+
+</body>
+</html>
